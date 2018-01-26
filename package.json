@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/steveyoungca/DJ3Training#readme",
   "dependencies": {
-    "browser-sync": "^2.23.6"
+    "bootstrap": "^4.0.0",
+    "bower": "^1.8.2",
+    "browser-sync": "^2.23.6",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "popper": "^1.0.1",
+    "toastr": "^2.1.4"
   }
 }
