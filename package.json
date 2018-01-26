@@ -1,0 +1,22 @@
+{
+  "name": "dj3training",
+  "version": "1.0.0",
+  "description": "Initial DJ3 in VSCode on a Mac",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steveyoungca/DJ3Training.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/steveyoungca/DJ3Training/issues"
+  },
+  "homepage": "https://github.com/steveyoungca/DJ3Training#readme",
+  "dependencies": {
+    "browser-sync": "^2.23.6"
+  }
+}
