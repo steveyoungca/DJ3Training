@@ -1,5 +1,10 @@
 # JavaScript
 
+How to install on a mac
+http://blog.teamtreehouse.com/install-node-js-npm-mac
+
+https://www.codeply.com/go/xZfTnAtKUM
+
 https://scotch.io/tutorials/how-to-use-browsersync-for-faster-development
 
  -  NPN -init 
