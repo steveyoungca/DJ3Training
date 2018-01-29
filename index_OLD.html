@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Sample dashboard">
+    <meta name="author" content="Steve Young">
+    <!-- Styles -->
+    <!-- Bootstrap CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="node_modules/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- Toastr CSS -->
+    <link href="node_modules/toastr/build/toastr.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="css/dashboard.css" rel="stylesheet" />
+    <link href="css/steved3.css" rel="stylesheet" />
+  
+    <title>Hello DJ3!</title>
+
+   
+
+    
+        
+       
+</head>
+<body>
+
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+                <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+                <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+                <ul class="navbar-nav px-3">
+                  <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="#">Sign out</a>
+                  </li>
+                </ul>
+              </nav>
+
+
+
+              <div class="container-fluid">
+                    <div class="row">
+                      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                        <div class="sidebar-sticky">
+                          <ul class="nav flex-column">
+                            <li class="nav-item">
+                              <a class="nav-link active" href="#">
+                                <span data-feather="home"></span>
+                                Dashboard <span class="sr-only">(current)</span>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">
+                                <span data-feather="file"></span>
+                                Orders
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">
+                                <span data-feather="shopping-cart"></span>
+                                Products
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">
+                                <span data-feather="users"></span>
+                                Customers
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">
+                                <span data-feather="bar-chart-2"></span>
+                                Reports
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">
+                                <span data-feather="layers"></span>
+                                Integrations
+                              </a>
+                            </li>
+                          </ul>
+              
+                          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Saved reports</span>
+                            <a class="d-flex align-items-center text-muted" href="#">
+                              <span data-feather="plus-circle"></span>
+                            </a>
+                          </h6>
+                          <ul class="nav flex-column mb-2">
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Current month
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Last quarter
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Social engagement
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Year-end sale
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
+
+
+                      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                              <h1 class="h2">Dashboard</h1>
+                              <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="btn-group mr-2">
+                                  <button class="btn btn-sm btn-outline-secondary">Share</button>
+                                  <button class="btn btn-sm btn-outline-secondary">Export</button>
+                                </div>
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                                  <span data-feather="calendar"></span>
+                                  This week
+                                </button>
+                              </div>
+                            </div>
+
+
+                            <canvas class="my-4" id="myChart" width="900" height="380">
+
+   
+
+                            </canvas>
+    
+
+                            <button>Update</button>
+                            <p>Thisis just a hi there</p>
+   
+
+
+    <!-- ==================================================   
+                                Code
+    ====================================================== -->   
+
+    <script>
+            
+            var margin = {top: 5, right: 40, bottom: 20, left: 120},
+                width = 960 - margin.left - margin.right,
+                height = 50 - margin.top - margin.bottom;
+            
+            var chart = d3.bullet()
+                .width(width)
+                .height(height);
+            
+            d3.json("bullets.json", function(error, data) {
+              if (error) throw error;
+            
+              var svg = d3.select("body").selectAll("svg")
+                  .data(data)
+                .enter().append("svg")
+                  .attr("class", "bullet")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                  .call(chart);
+            
+              var title = svg.append("g")
+                  .style("text-anchor", "end")
+                  .attr("transform", "translate(-6," + height / 2 + ")");
+            
+              title.append("text")
+                  .attr("class", "title")
+                  .text(function(d) { return d.title; });
+            
+              title.append("text")
+                  .attr("class", "subtitle")
+                  .attr("dy", "1em")
+                  .text(function(d) { return d.subtitle; });
+            
+              d3.selectAll("button").on("click", function() {
+                svg.datum(randomize).call(chart.duration(1000)); // TODO automatic transition
+              });
+            });
+            
+            function randomize(d) {
+              if (!d.randomizer) d.randomizer = randomizer(d);
+              d.ranges = d.ranges.map(d.randomizer);
+              d.markers = d.markers.map(d.randomizer);
+              d.measures = d.measures.map(d.randomizer);
+              return d;
+            }
+            
+            function randomizer(d) {
+              var k = d3.max(d.ranges) * .2;
+              return function(d) {
+                return Math.max(0, d + k * (Math.random() - .5));
+              };
+            }
+            
+            </script>
+            
+
+    <!-- Javascript files -->
+    <!-- jQuery -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+
+     <!-- Popper JS -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- toastr
+    ================================================== -->   
+    <script src="node_modules/toastr/build/toastr.min.js"></script>
+    <script src="scripts/toasterDisplay.js"></script>
+
+    <!-- D3
+    ================================================== -->   
+    <script src="scripts/d3.js"></script>
+
+
+     <!-- My Custom JS Modules
+    ================================================== -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/bullets.js"></script>  
+
+</body>
+</html>

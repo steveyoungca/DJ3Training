@@ -1,46 +1,98 @@
 ﻿<!DOCTYPE html>
-<html>
+<meta charset="utf-8">
+
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<style>
 
-    <!-- Styles -->
-    <!-- Bootstrap CSS -->
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="node_modules/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <!-- Toastr CSS -->
-    <link href="node_modules/toastr/build/toastr.min.css" rel="stylesheet" />
+	.axis {
+	  font: 10px sans-serif;
+	}
 
-    <!-- Custom CSS -->
-    <link href="css/app.css" rel="stylesheet" />
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
 
-    <title>Hello DJ3!</title>
+	</style>
 </head>
+
 <body>
-     Thisis just a hi there
-   
+	
+<script src="http://d3js.org/d3.v3.min.js"></script>
 
+<script>
 
+var margin = {top: 20, right: 20, bottom: 70, left: 40},
+    width = 600 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
 
-    <!-- Javascript files -->
-    <!-- jQuery -->
-    <script src="node_modules/jquery/dist/jquery.js"></script>
+// Parse the date / time
+var	parseDate = d3.time.format("%Y-%m").parse;
 
-     <!-- Popper JS -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
 
-    <!-- Bootstrap JS -->
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+var y = d3.scale.linear().range([height, 0]);
 
-    <!-- toastr
-    ================================================== -->   
-    <script src="node_modules/toastr/build/toastr.min.js"></script>
-    <script src="scripts/toasterDisplay.js"></script>
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickFormat(d3.time.format("%Y-%m"));
 
-     <!-- My Custom JS Modules
-    ================================================== -->  
-    <script src="scripts/app.js"></script>
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", 
+          "translate(" + margin.left + "," + margin.top + ")");
+
+d3.csv("bar-data.csv", function(error, data) {
+
+    data.forEach(function(d) {
+        d.date = parseDate(d.date);
+        d.value = +d.value;
+    });
+	
+  x.domain(data.map(function(d) { return d.date; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", "-.55em")
+      .attr("transform", "rotate(-90)" );
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Value ($)");
+
+  svg.selectAll("bar")
+      .data(data)
+    .enter().append("rect")
+      .style("fill", "steelblue")
+      .attr("x", function(d) { return x(d.date); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); });
+
+});
+
+</script>
 
 </body>
-</html>

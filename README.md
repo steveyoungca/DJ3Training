@@ -25,8 +25,10 @@ npm install --save popper
 npm install --save toastr
 npm install --save font-awesome
 
-
+https://d3js.org
+https://bl.ocks.org/mbostock 
 
 Now I need BootStrap
 https://getbootstrap.com
+https://getbootstrap.com/docs/4.0/examples/dashboard/
 
