@@ -21,6 +21,7 @@
     "bower": "^1.8.2",
     "browser-sync": "^2.23.6",
     "font-awesome": "^4.7.0",
+    "gulp": "^3.9.1",
     "jquery": "^3.3.1",
     "popper": "^1.0.1",
     "toastr": "^2.1.4"

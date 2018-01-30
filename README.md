@@ -26,6 +26,9 @@ npm install -g eslint
 http://blog.osmosys.asia/2015/06/08/using-bower-grunt-and-vs-code-for-node-js-development/
 
 browser-sync start --server --files "*.html, css/*.css"
+I will add .js
+browser-sync start --server --files "*.html, css/*.css, scripts/*.js"
+
 --- do not really need this
 sudo npm install -g bower
 npm i bower --save 
@@ -46,3 +49,8 @@ Now I need BootStrap
 https://getbootstrap.com
 https://getbootstrap.com/docs/4.0/examples/dashboard/
 
+
+Load in from GitHub for first time, need to load dependant packages
+For example if you want to install all the dependent npm modules for the "demo-project" (currently residing in folder)
+npm install npm-install-all -g
+npm-install-all
