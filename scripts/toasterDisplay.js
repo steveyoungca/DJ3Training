@@ -34,7 +34,7 @@ function displayToast(toastMessage, messageLevel) {
     }
     //toastr.warning('HiThere');
 
-    toastr.success(toastMessage);
+    //toastr.success(toastMessage);
     //toastr.error('Imanerror');
     // toastr.clear();
 

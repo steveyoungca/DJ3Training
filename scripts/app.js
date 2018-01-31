@@ -24,5 +24,5 @@ function setLoggingValue() {
 
 setLoggingValue();
 //Message level tha the initialization is finished
-displayToast('Initialization Finished', 4);
+//displayToast('Initialization Finished', 4);
 
